@@ -1,11 +1,10 @@
 # Jest
 
-[Jest](https://jestjs.io/) 
+Documentación oficial: [Jest](https://jestjs.io/) 
 
 ## Requisitos
 
-- [Node Instalado](https://nodejs.org/es)
-- 
+- [Node Instalado](https://nodejs.org/es) (Versión mayor a la v18.8.0)
 
 # Setup
 
@@ -38,6 +37,8 @@ Además se deberá agregar en el archivo package.json la siguiente línea de có
 El `package.json` debería quedar similar a esto:
 ![Package json](./assets/package.png)
 
+[Documentación: Jest y ECMAScript Modules](https://jestjs.io/docs/ecmascript-modules)
+
 ## 5. Modificar el comando para mostrar el coverage:
 
 Agregar la flag `--coverage` al script para obtener el reporte de coverage
@@ -56,4 +57,3 @@ Implementar tests unitarios para la clase Calculator y Country
 
 ## Setup/Teardown
 [Setup and teardown](https://jestjs.io/docs/setup-teardown)
-
