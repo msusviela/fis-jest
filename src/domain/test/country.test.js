@@ -16,4 +16,26 @@ describe('Country Tests', () => {
         expect(country1).not.toEqual(country2);
         expect(country1).not.toEqual(country3);
     });
+
+    test('getName devuelve el nombre correcto', () => {
+        const country = new Country('Uruguay', 'South America');
+        expect(country.getName()).toBe('Uruguay');
+    });
+
+    test('getContinent devuelve el continente correcto', () => {
+        const country = new Country('Uruguay', 'South America');
+        expect(country.getContinent()).toBe('South America');
+    });
+
+    test('setName actualiza el nombre correctamente', () => {
+        const country = new Country('Uruguay', 'South America');
+        country.setName('Argentina');
+        expect(country.getName()).toBe('Argentina');
+    });
+
+    test('setContinent actualiza el continente correctamente', () => {
+        const country = new Country('Uruguay', 'South America');
+        country.setContinent('North America');
+        expect(country.getContinent()).toBe('North America');
+    });
 });
