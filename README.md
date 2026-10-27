@@ -1,59 +1,73 @@
-# Jest
+# TypeScript, Vite y Vitest
 
-Documentación oficial: [Jest](https://jestjs.io/) 
+Proyecto de ejemplo para aprender testing unitario con TypeScript. El proyecto
+usa Vite como herramienta de desarrollo y Vitest como runner de pruebas.
 
 ## Requisitos
 
-- [Node Instalado](https://nodejs.org/es) (Versión mayor a la v18.8.0)
+- [Node.js](https://nodejs.org/es) versión 18 o superior
 
-# Setup
+## Instalación
 
-## 1. Inicializar un proyecto de node.
+Clonar el repositorio e instalar las dependencias:
 
-En caso de no tenerlo, inicializar un proyecto de Node con el comando `npm init -y`. Se deberá crear el arhcivo `package.json`
-
-## 2. Instalar la dependencia de Jest:
-`npm install --save-dev jest`
-> --save-dev hace que no haya herramientas de desarrollo innecesarias en el entorno final.
-
-## 3. Agregar el script al package.json:
-```
-"scripts": {
-  "test": "jest"
-}
+```bash
+npm install
 ```
 
-Observar que ocurre cuando se ejecuta `npm run test`
+## Scripts disponibles
 
-## 4. Configurar el soporte para Módulos ES6:
+```bash
+npm run dev       # inicia el servidor de desarrollo de Vite
+npm run build     # comprueba los tipos y genera el build de producción
+npm test          # ejecuta las pruebas una vez y genera el coverage
+npm run test:watch # ejecuta Vitest en modo watch
+```
 
-Como estamos usando ES6, para importar modulos, se debe usar la palabra reservada import. Jest soporta una versión experimental de ES6, por lo que al intentar ejecutar los tests simplemente con "jest", no va a funcionar. Para que funcione, se debe modificar el contenido del script "test" por el siguiente:
+## Configuración
 
-`node --experimental-vm-modules node_modules/jest/bin/jest.js`
+### TypeScript y módulos ES
 
-Además se deberá agregar en el archivo package.json la siguiente línea de código:
-`"type": "module"`
+El proyecto está configurado como módulo ES mediante `"type": "module"` en
+`package.json`. Los archivos de código y pruebas usan la sintaxis moderna de
+imports y exports:
 
-El `package.json` debería quedar similar a esto:
-![Package json](./assets/package.png)
+```ts
+import { Calculator } from './calculator';
+```
 
-[Documentación: Jest y ECMAScript Modules](https://jestjs.io/docs/ecmascript-modules)
+La configuración del compilador está en `tsconfig.json`. El comando `build`
+ejecuta primero `tsc --noEmit` para comprobar los tipos y después genera el
+build con Vite.
 
-## 5. Modificar el comando para mostrar el coverage:
+### Vitest
 
-Agregar la flag `--coverage` al script para obtener el reporte de coverage
+Vitest se configura en `vite.config.ts` y comparte la configuración del
+ecosistema Vite. Las pruebas se encuentran en `src/domain/test/` y pueden
+escribirse con las APIs de Vitest:
 
-# Ejemplo: 
+```ts
+import { describe, expect, it } from 'vitest';
+```
 
-Implementar tests unitarios para la clase Calculator y Country
+El comando `npm test` también genera el reporte de cobertura con el proveedor
+V8. El reporte HTML se guarda en `coverage/`.
 
-# Documentación:
+## Ejemplo
 
-## Getting started (Config para JS Y TS):
-[Getting started](https://jestjs.io/docs/getting-started)
+El proyecto contiene pruebas unitarias para las clases `Calculator` y
+`Country`, ubicadas junto al dominio en `src/domain/`.
 
-## Matchers:
-[Matchers](https://jestjs.io/docs/using-matchers)
+Para ejecutar una prueba concreta:
 
-## Setup/Teardown
-[Setup and teardown](https://jestjs.io/docs/setup-teardown)
+```bash
+npx vitest run src/domain/test/calculator.test.ts
+```
+
+## Documentación
+
+- [TypeScript: documentación oficial](https://www.typescriptlang.org/docs/)
+- [Vite: guía de inicio](https://vite.dev/guide/)
+- [Vitest: guía de inicio](https://vitest.dev/guide/)
+- [Vitest: assertions y matchers](https://vitest.dev/api/expect.html)
+- [Vitest: setup y teardown](https://vitest.dev/api/)
